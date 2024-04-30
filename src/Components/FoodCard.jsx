@@ -1,8 +1,8 @@
 import React from 'react';
-import { Dimensions, FlatList, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View, Image, Animated, } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { Dimensions, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View, Image, Animated, } from 'react-native';
 import foods from '../Data/food' // Adjusted import path
 import COLORS from '../Data/colors'
+import { Rating } from 'react-native-elements';
 
 
 const { width } = Dimensions.get('screen');
@@ -27,11 +27,13 @@ const FoodCard = ({ navigation }) => {
             inputRange,
             outputRange: [0.8, 1, 0.8],
         });
+
+        const rating = food.rating;
         return (
             <TouchableOpacity
                 disabled={activeCardIndex != index}
                 activeOpacity={1}
-                onPress={() => navigation.navigate('FoodDetails', food)}
+                onPress={() => navigation.navigate('ProductDetailsScreen', food)}
             >
                 <Animated.View style={{ ...style.card, transform: [{ scale }] }}>
                     <Animated.View style={{ ...style.cardOverLay, opacity }} />
@@ -46,29 +48,27 @@ const FoodCard = ({ navigation }) => {
                         <View
                             style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                             <View>
-                                <Text style={{ fontWeight: 'bold', fontSize: 17 }}>
+                                <Text style={{ fontWeight: 'bold', fontSize: 20 }}>
                                     {food.name}
                                 </Text>
-                                <Text style={{ color: "grey", fontSize: 12 }}>
+                                <Text style={{ color: "grey", fontSize: 14 }}>
                                     {food.type}
                                 </Text>
                             </View>
                         </View>
+                        <>
+                            <Text style={{ color: 'gray', fontSize: 14,marginTop: 5, }}> {food.rating}</Text>
+                        </>
                         <View
                             style={{
                                 flexDirection: 'row',
                                 justifyContent: 'space-between',
-                                marginTop: 10,
+                           
                             }}>
                             <View style={{ flexDirection: 'row' }}>
-                                <Icon name="star" size={15} color={"#f5a623"} />
-                                <Icon name="star" size={15} color={"#f5a623"} />
-                                <Icon name="star" size={15} color={"#f5a623"} />
-                                <Icon name="star" size={15} color={"#f5a623"} />
-                                <Icon name="star" size={15} color={"grey"} />
-                                
+                                <Rating readonly type='custom' tintColor={'white'} ratingBackgroundColor={COLORS.grey} ratingColor={COLORS.primary}  fractions={1} startingValue={food.rating} imageSize={14} />
                             </View>
-                            <Text style={{ fontSize: 10, color: "grey" }}>{food.review} reviews</Text>
+                            <Text style={{ fontSize: 14, color: "grey" }}>{food.review} reviews</Text>
                         </View>
                     </View>
                 </Animated.View>
@@ -104,15 +104,7 @@ const FoodCard = ({ navigation }) => {
                     />
 
                 </View>
-                {/* <View>
-                    <Text style={{backgroundColor:'red'}}>
-                        {Array.isArray(foods) && foods.map((food) => (
-                            <Text style={{color:'yellow'}} key={food.id}>{food.name}</Text>
-                           
-                        ))}
-                    </Text>
-
-                </View> */}
+               
 
 
             </ScrollView>
@@ -121,26 +113,6 @@ const FoodCard = ({ navigation }) => {
 }
 
 const style = StyleSheet.create({
-    header: {
-        marginTop: 20,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        paddingHorizontal: 20,
-    },
-    searchInputContainer: {
-        height: 50,
-        backgroundColor: COLORS.light,
-        marginTop: 15,
-        marginHorizontal: 20,
-        borderRadius: 30,
-        borderTopLeftRadius: 30,
-        borderBottomLeftRadius: 30,
-        flexDirection: 'row',
-        alignItems: 'center',
-        borderColor: COLORS.primary,
-        borderWidth: 1,
-
-    },
     card: {
         height: 280,
         width: cardWidth,
@@ -183,20 +155,6 @@ const style = StyleSheet.create({
         zIndex: 100,
         width: cardWidth,
         borderRadius: 15,
-    },
-    topFoodCard: {
-        height: 160,
-        width: 220,
-        backgroundColor: COLORS.white,
-        elevation: 15,
-        marginHorizontal: 10,
-        borderRadius: 10,
-    },
-    topFoodCardImage: {
-        height: 100,
-        width: '100%',
-        borderTopRightRadius: 10,
-        borderTopLeftRadius: 10,
     },
 })
 

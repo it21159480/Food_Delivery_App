@@ -15,7 +15,6 @@ import {
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import FoodCard from '../Components/FoodCard';
 import TopFoodCard from '../Components/TopFoodCard';
-// import foods from '../Data/Food.json'
 import foods from '../Data/food'
 import COLORS from '../Data/colors'
 
@@ -44,7 +43,7 @@ const HomeScreen = ({ navigation }) => {
   const Card = ({ searchFood }) => (
     <TouchableOpacity
       activeOpacity={1}
-      onPress={() => navigation.navigate('FoodDetails', searchFood)}>
+      onPress={() => navigation.navigate('ProductDetailsScreen', searchFood)}>
       <View style={style.card}>
         <Image source={searchFood.image} style={style.cardImage} />
         <View style={style.cardDetails}>
@@ -111,7 +110,6 @@ const style = StyleSheet.create({
     alignItems: 'center',
     borderColor: COLORS.primary,
     borderWidth: 1,
-
   },
   card: {
     elevation: 5,
@@ -127,42 +125,8 @@ const style = StyleSheet.create({
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
   },
-  priceTag: {
-    height: 60,
-    width: 80,
-    backgroundColor: COLORS.primary,
-    position: 'absolute',
-    zIndex: 1,
-    right: 0,
-    borderTopRightRadius: 15,
-    borderBottomLeftRadius: 15,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   cardDetails: {
     padding: 20,
-  },
-  cardOverLay: {
-    height: 280,
-    backgroundColor: COLORS.white,
-    position: 'absolute',
-    zIndex: 100,
-    width: cardWidth,
-    borderRadius: 15,
-  },
-  topFoodCard: {
-    height: 160,
-    width: 220,
-    backgroundColor: COLORS.white,
-    elevation: 15,
-    marginHorizontal: 10,
-    borderRadius: 10,
-  },
-  topFoodCardImage: {
-    height: 100,
-    width: '100%',
-    borderTopRightRadius: 10,
-    borderTopLeftRadius: 10,
   },
   flatListContainer: {
     paddingBottom: 20,

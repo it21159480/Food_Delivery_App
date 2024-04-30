@@ -52,7 +52,7 @@ const foods = [
     },
     {
         id: "4",
-        name: "Creamy Boursin Pasta",
+        name: "Boursin Pasta",
         type: "Italian Cuisine",
         price: "$30",
         image: { uri: ("https://thedizzycook.com/wp-content/uploads/2019/12/Boursin-pasta.jpg") },
